@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmnls:th="http://thymeleaf.org" xmlns:xmnls="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Читатель</title>
+</head>
+<body>
+<p th:text="${person.getFullName()}">VALUE</p>
+<p th:text="${person.getPersonId()}">VALUE</p>
+<hr style="height:5px;">
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
+    <input type="submit" value="Редактировать">
+</form>
+<form th:method="Delete" th:action="@{/people/{id}(id=${person.getPersonId()})}">
+    <input type="submit" value="Удалить">
+</form>
+</body>
+</html>

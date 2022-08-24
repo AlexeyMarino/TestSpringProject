@@ -39,6 +39,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         return templateResolver;
@@ -56,7 +57,9 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
+
     }
 
     @Bean
@@ -64,8 +67,8 @@ public class SpringConfig implements WebMvcConfigurer {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("driver")));
         dataSource.setUrl(environment.getProperty("url"));
-        dataSource.setUsername(environment.getProperty("username"));
-        dataSource.setPassword("password");
+        dataSource.setUsername(environment.getProperty("usern"));
+        dataSource.setPassword(environment.getProperty("password"));
         return dataSource;
     }
 

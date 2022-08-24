@@ -2,7 +2,7 @@ package ru.alexeymarino.springlibrary.model;
 
 public class Person {
     private int personId;
-    private String follName;
+    private String fullName;
     private int birthYear;
 
     public int getPersonId() {
@@ -13,12 +13,12 @@ public class Person {
         this.personId = personId;
     }
 
-    public String getFollName() {
-        return follName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFollName(String follName) {
-        this.follName = follName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getBirthYear() {
