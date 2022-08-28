@@ -31,12 +31,12 @@ public class PersonDAO {
         jdbcTemplate.update("INSERT INTO person(full_name, birth_year) VALUES(?, ?)", person.getFullName(), person.getBirthYear());
     }
 
-    public void update(Person person) {
-        jdbcTemplate.update("UPDATE person SET full_name=?, birth_year=? WHERE person_id=?", person.getFullName(), person.getBirthYear(), person.getPersonId());
+    public void update(int id, Person person) {
+        jdbcTemplate.update("UPDATE person SET full_name=?, birth_year=? WHERE person_id=?", person.getFullName(), person.getBirthYear(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM person  WHERE person_id=?", id);
+        jdbcTemplate.update("DELETE FROM person WHERE person_id=?", id);
     }
 
     public List<Book> getBooksByPersonId(int id) {

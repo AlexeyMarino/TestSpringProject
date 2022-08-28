@@ -2,16 +2,31 @@
 <html lang="en" xmnls:th="http://thymeleaf.org" xmlns:xmnls="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Читатель</title>
 </head>
 <body>
-<p th:text="${person.getFullName()}">VALUE</p>
-<p th:text="${person.getPersonId()}">VALUE</p>
-<hr style="height:5px;">
+<p th:text="${person.getFullName() + ', ' + person.getBirthYear}">VALUE</p>
+
+<div th:if="${books.isEmpty}">
+    <p>Человек не взял ни одной книги</p>
+</div>
+
+<div th:if="${!books.isEmpty}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <table th:each="book : ${books}">
+        <tr th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getPublicationYear()}"></tr>
+    </table>
+</div>
+
+<hr/>
 <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
     <input type="submit" value="Редактировать">
 </form>
 <form th:method="Delete" th:action="@{/people/{id}(id=${person.getPersonId()})}">
+    <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Удалить">
 </form>
 </body>
