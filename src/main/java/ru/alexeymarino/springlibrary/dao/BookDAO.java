@@ -20,11 +20,11 @@ public class BookDAO {
     }
 
     public List<Book> getAll() {
-        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        return jdbcTemplate.query("SELECT * FROM book", new BookMapper());
     }
 
     public Book getById(int id) {
-        return jdbcTemplate.query("SELECT * FROM book WHERE book_id = ?", new Object[] {id}, new BeanPropertyRowMapper<>(Book.class)).stream()
+        return jdbcTemplate.query("SELECT * FROM book WHERE book_id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Book.class)).stream()
                 .findAny().orElse(null);
     }
 
@@ -45,7 +45,7 @@ public class BookDAO {
     }
 
     public Optional<Person> getBookOwner(int id) {
-        return jdbcTemplate.query("SELECT Person.* FROM book JOIN person ON book.person_id = person.person_id WHERE book.book_id = ?", new Object[] {id}, new BeanPropertyRowMapper<>(Person.class)).stream()
+        return jdbcTemplate.query("SELECT Person.* FROM book JOIN person ON book.person_id = person.person_id WHERE book.book_id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream()
                 .findAny();
     }
 
