@@ -24,7 +24,7 @@ public class BookDAO {
     }
 
     public Book getById(int id) {
-        return jdbcTemplate.query("SELECT * FROM book WHERE book_id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Book.class)).stream()
+        return jdbcTemplate.query("SELECT * FROM book WHERE book_id = ?", new Object[]{id}, new BookMapper()).stream()
                 .findAny().orElse(null);
     }
 
@@ -38,10 +38,6 @@ public class BookDAO {
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM book WHERE book_id=?", id);
-    }
-
-    public List<Book> getBooksByPersonId(int id) {
-        return jdbcTemplate.query("SELECT * FROM book WHERE person_id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
 
     public Optional<Person> getBookOwner(int id) {
