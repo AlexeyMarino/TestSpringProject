@@ -48,4 +48,19 @@ public class PeopleController {
         personDAO.delete(id);
         return "redirect:/people";
     }
+
+    @GetMapping("/new")
+    public String newPerson(Model model) {
+        Person person = new Person();
+        model.addAttribute("person", person);
+        return "people/create";
+    }
+
+    @PostMapping()
+    public String createPerson(@ModelAttribute("person") Person person, Model model) {
+        personDAO.save(person);
+        model.addAttribute("people", personDAO.getAll());
+        return "people/showall";
+    }
+
 }
