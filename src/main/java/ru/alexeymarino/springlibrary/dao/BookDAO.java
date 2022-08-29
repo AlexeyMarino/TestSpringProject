@@ -13,12 +13,10 @@ import java.util.Optional;
 @Repository
 public class BookDAO {
     private final JdbcTemplate jdbcTemplate;
-    private final PersonDAO personDAO;
 
     @Autowired
     public BookDAO(JdbcTemplate jdbcTemplate, PersonDAO personDAO) {
         this.jdbcTemplate = jdbcTemplate;
-        this.personDAO = personDAO;
     }
 
     public List<Book> getAll() {
@@ -31,7 +29,7 @@ public class BookDAO {
     }
 
     public void save(Book book) {
-        jdbcTemplate.update("INSERT INTO book(title, author, publication_year) VALUES(?, ?, ?, ?)", book.getTitle(), book.getAuthor(), book.getPublicationYear());
+        jdbcTemplate.update("INSERT INTO book(title, author, publication_year) VALUES(?, ?, ?)", book.getTitle(), book.getAuthor(), book.getPublicationYear());
     }
 
     public void update(int id, Book book) {
