@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <form th:action="@{/people/{id}(id=${person.getPersonId})}" th:object="${person}" th:method="patch">
-
-        <div>
-            <label>Введите ФИО:</label>
-            <input type="text" th:field="*{fullName}"/>
-        </div>
-        <div>
-            <label>Введите год рождения:</label>
-            <input type="number" th:field="*{birthYear}"/>
-        </div>
-
-        <input type="submit" value="Редактировать!"/>
-    </form>
-
 </head>
+
 <body>
+<form th:action="@{/people/{id}(id=${person.getPersonId})}" th:object="${person}" th:method="patch">
+
+    <div>
+        <label>Введите ФИО:</label>
+        <input type="text" th:field="*{fullName}"/>
+    </div>
+    <div>
+        <label>Введите год рождения:</label>
+        <input type="number" th:field="*{birthYear}"/>
+    </div>
+
+    <input type="submit" value="Редактировать!"/>
+</form>
 
 </body>
 </html>
