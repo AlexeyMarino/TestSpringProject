@@ -11,14 +11,17 @@
     <div>
         <label>Введите название книги:</label>
         <input type="text" th:field="*{title}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name error</p>
     </div>
     <div>
         <label>Введите автора:</label>
         <input type="text" th:field="*{author}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Name error</p>
     </div>
     <div>
         <label>Введите год:</label>
         <input type="number" th:field="*{publicationYear}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('publicationYear')}" th:errors="*{publicationYear}">Name error</p>
     </div>
     <input type="submit" value="Создать!"/>
 </form>

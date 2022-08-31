@@ -3,12 +3,14 @@ package ru.alexeymarino.springlibrary.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alexeymarino.springlibrary.dao.BookDAO;
 import ru.alexeymarino.springlibrary.dao.PersonDAO;
 import ru.alexeymarino.springlibrary.model.Book;
 import ru.alexeymarino.springlibrary.model.Person;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -50,7 +52,10 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("book") Book book, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id) {
+        if(bindingResult.hasErrors()) {
+            return "books/edit";
+        }
         bookDAO.update(id, book);
         return "redirect:/books";
     }
@@ -68,7 +73,10 @@ public class BooksController {
     }
 
     @PostMapping()
-    public String createBook(@ModelAttribute("book") Book book, Model model) {
+    public String createBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "books/create";
+        }
         bookDAO.save(book);
         model.addAttribute("books", bookDAO.getAll());
         return "books/showall";
