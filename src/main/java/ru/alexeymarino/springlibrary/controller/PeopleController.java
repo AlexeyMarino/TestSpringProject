@@ -3,9 +3,12 @@ package ru.alexeymarino.springlibrary.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alexeymarino.springlibrary.dao.PersonDAO;
 import ru.alexeymarino.springlibrary.model.Person;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
@@ -39,7 +42,10 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id) {
+        if(bindingResult.hasErrors()) {
+            return "people/edit";
+        }
         personDAO.update(id, person);
         return "redirect:/people";
     }
@@ -57,7 +63,10 @@ public class PeopleController {
     }
 
     @PostMapping()
-    public String createPerson(@ModelAttribute("person") Person person, Model model) {
+    public String createPerson(@ModelAttribute("person") Person person, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "people/create";
+        }
         personDAO.save(person);
         model.addAttribute("people", personDAO.getAll());
         return "people/showall";
