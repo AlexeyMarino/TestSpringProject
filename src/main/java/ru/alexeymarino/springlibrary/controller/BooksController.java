@@ -70,7 +70,7 @@ public class BooksController {
     @PostMapping()
     public String createBook(@ModelAttribute("book") Book book, Model model) {
         bookDAO.save(book);
-        model.addAttribute("book", bookDAO.getAll());
+        model.addAttribute("books", bookDAO.getAll());
         return "books/showall";
     }
 
